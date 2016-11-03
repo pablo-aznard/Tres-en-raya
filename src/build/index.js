@@ -23,7 +23,6 @@ var App = React.createClass({
 	},
 
 	winner: function winner() {
-		console.log("winner function");
 		var valores = this.state.valores;
 		var win = false;
 		var a = 0,
@@ -36,8 +35,6 @@ var App = React.createClass({
 		    h = 0;
 		// El 0 gana con +3 y la X gana con -3
 		for (var i = 0; i < 3; i++) {
-			console.log(a, b, c, d, e, f, g);
-			console.log(valores[0][i]);
 			if (valores[0][i] !== '-') a += valores[0][i] === "0" ? 1 : -1;
 			if (valores[1][i] !== '-') b += valores[1][i] === "0" ? 1 : -1;
 			if (valores[2][i] !== '-') c += valores[2][i] === "0" ? 1 : -1;
@@ -51,10 +48,18 @@ var App = React.createClass({
 		return false;
 	},
 
+	reset: function reset() {
+		this.setState({
+			turno: this.state.turno = JugadorX,
+			valores: this.state.valores = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']]
+		});
+	},
+
 	appClick: function appClick(numeroFila, numeroColumna) {
 		var valores = this.state.valores;
 		var nuevoValor = this.state.turno === JugadorX ? 'X' : '0';
 		valores[numeroFila][numeroColumna] = nuevoValor;
+		//cada vez que se hace un setState se ejecuta el render
 		this.setState({
 			turno: this.state.turno === JugadorX ? Jugador0 : JugadorX,
 			valores: this.state.valores
@@ -71,7 +76,12 @@ var App = React.createClass({
 			null,
 			React.createElement(Cabecera, { texto: texto }),
 			React.createElement(Tablero, { valores: this.state.valores,
-				manejadorTableroClick: this.appClick })
+				manejadorTableroClick: this.appClick }),
+			React.createElement(
+				'button',
+				{ onClick: this.reset },
+				'Reiniciar partida'
+			)
 		);
 	}
 });

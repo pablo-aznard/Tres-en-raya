@@ -18,14 +18,11 @@ var App = React.createClass({
 	},
 
 	winner: function () {
-		console.log("winner function");
 		let valores = this.state.valores;
 		var win = false;
 		var a=0,b=0,c=0,d=0,e=0,f=0,g=0,h=0;
 		// El 0 gana con +3 y la X gana con -3
 		for (var i = 0; i < 3; i++) {
-			console.log(a,b,c,d,e,f,g);
-			console.log(valores[0][i])
 			if (valores[0][i] !== '-') a += (valores[0][i] === "0") ? 1 : -1;
 			if (valores[1][i] !== '-') b += (valores[1][i] === "0") ? 1 : -1;
 			if (valores[2][i] !== '-') c += (valores[2][i] === "0") ? 1 : -1;
@@ -41,10 +38,18 @@ var App = React.createClass({
 		return false;
 	},
 
+	reset: function(){
+		this.setState({
+			turno: this.state.turno = JugadorX,
+			valores: this.state.valores = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']]
+		});
+	},
+
 	appClick: function (numeroFila, numeroColumna){
 		let valores = this.state.valores;
 		let nuevoValor = this.state.turno === JugadorX ? 'X' : '0';
 		valores[numeroFila][numeroColumna] = nuevoValor;
+		//cada vez que se hace un setState se ejecuta el render
 		this.setState({
 			turno: this.state.turno === JugadorX ? Jugador0 : JugadorX,
 			valores: this.state.valores
@@ -61,6 +66,7 @@ var App = React.createClass({
 				<Cabecera texto={texto}/>
 				<Tablero valores={this.state.valores}
 					manejadorTableroClick={this.appClick}/>
+				<button onClick={this.reset}>Reiniciar partida</button>
 			</div>
 		)
 	}
