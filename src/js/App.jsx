@@ -4,12 +4,14 @@ const Tablero = require('./Tablero.jsx');
 const JugadorX = "jugador 1 - las X";
 const Jugador0 = "jugador 2 - los 0";
 const VALORES = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']];
+const movimientos = 0;
 
 var App = React.createClass({
 	getInitialState: function(){
 		return{
 			turno: JugadorX,
-			valores: VALORES
+			valores: VALORES,
+			movimientos: movimientos
 		};
 	},
 
@@ -41,7 +43,8 @@ var App = React.createClass({
 	reset: function(){
 		this.setState({
 			turno: this.state.turno = JugadorX,
-			valores: this.state.valores = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']]
+			valores: this.state.valores = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']],
+			movimientos: this.state.movimientos = 0
 		});
 	},
 
@@ -52,7 +55,8 @@ var App = React.createClass({
 		//cada vez que se hace un setState se ejecuta el render
 		this.setState({
 			turno: this.state.turno === JugadorX ? Jugador0 : JugadorX,
-			valores: this.state.valores
+			valores: this.state.valores,
+			movimientos: this.state.movimientos += 1
 		});
 		if (this.winner()) {
 			this.showAlert();
@@ -67,6 +71,7 @@ var App = React.createClass({
 				<Tablero valores={this.state.valores}
 					manejadorTableroClick={this.appClick}/>
 				<button onClick={this.reset}>Reiniciar partida</button>
+				Número de movimientos: {this.state.movimientos}
 			</div>
 		)
 	}
