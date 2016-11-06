@@ -5,18 +5,21 @@ const JugadorX = "jugador 1 - las X";
 const Jugador0 = "jugador 2 - los 0";
 const VALORES = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']];
 const movimientos = 0;
+var fin = 0;
 
 var App = React.createClass({
 	getInitialState: function(){
 		return{
 			turno: JugadorX,
 			valores: VALORES,
-			movimientos: movimientos
+			movimientos: movimientos,
+			fin: fin
 		};
 	},
 
 	showAlert:function(){
-		 alert(this.state.turno+" ha ganado!");
+		if(fin == 1)
+			alert(this.state.turno+" ha ganado!");
 	},
 
 	winner: function () {
@@ -35,8 +38,9 @@ var App = React.createClass({
 			if (valores[2-i][i] !== '-') h += (valores[2-i][i] === "0") ? 1 : -1;
 		}
 		if (Math.abs(a) === 3 || Math.abs(b) === 3 || Math.abs(c) === 3 || Math.abs(d) === 3
-		 || Math.abs(e) === 3 || Math.abs(f) === 3 || Math.abs(g) === 3 || Math.abs(h) === 3)
-			return true;
+		 || Math.abs(e) === 3 || Math.abs(f) === 3 || Math.abs(g) === 3 || Math.abs(h) === 3){
+			 return true;
+		}
 		return false;
 	},
 
@@ -44,7 +48,8 @@ var App = React.createClass({
 		this.setState({
 			turno: this.state.turno = JugadorX,
 			valores: this.state.valores = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']],
-			movimientos: this.state.movimientos = 0
+			movimientos: this.state.movimientos = 0,
+			fin: fin = 0
 		});
 	},
 
@@ -59,6 +64,7 @@ var App = React.createClass({
 			movimientos: this.state.movimientos += 1
 		});
 		if (this.winner()) {
+			fin += 1;
 			this.showAlert();
 		}
 	},
