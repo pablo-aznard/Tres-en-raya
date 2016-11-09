@@ -1,3 +1,8 @@
+import {Button} from 'react-bootstrap';
+
+var React = require('react');
+var ReactDOM = require('react-dom');
+
 const Cabecera = require('./Cabecera.jsx');
 const Tablero = require('./Tablero.jsx');
 
@@ -6,6 +11,14 @@ const Jugador0 = "jugador 2 - los 0";
 const VALORES = [['-', '-', '-'], ['-', '-', '-'], ['-', '-', '-']];
 const movimientos = 0;
 var fin = 0;
+
+const divStyle = {
+	textAlign: 'center'
+};
+const resetStyle = {
+	backgroundColor: '#A49494',
+	color: 'white'
+}
 
 var App = React.createClass({
 	getInitialState: function(){
@@ -18,7 +31,7 @@ var App = React.createClass({
 	},
 
 	showAlert:function(){
-		if(fin == 1)
+		if (fin == 1)
 			alert(this.state.turno+" ha ganado!");
 	},
 
@@ -54,18 +67,20 @@ var App = React.createClass({
 	},
 
 	appClick: function (numeroFila, numeroColumna){
-		let valores = this.state.valores;
-		let nuevoValor = this.state.turno === JugadorX ? 'X' : '0';
-		valores[numeroFila][numeroColumna] = nuevoValor;
-		//cada vez que se hace un setState se ejecuta el render
-		this.setState({
-			turno: this.state.turno === JugadorX ? Jugador0 : JugadorX,
-			valores: this.state.valores,
-			movimientos: this.state.movimientos += 1
-		});
-		if (this.winner()) {
-			fin += 1;
-			this.showAlert();
+		if (fin < 1) {
+			let valores = this.state.valores;
+			let nuevoValor = this.state.turno === JugadorX ? 'X' : '0';
+			valores[numeroFila][numeroColumna] = nuevoValor;
+			//cada vez que se hace un setState se ejecuta el render
+			this.setState({
+				turno: this.state.turno === JugadorX ? Jugador0 : JugadorX,
+				valores: this.state.valores,
+				movimientos: this.state.movimientos += 1
+			});
+			if (this.winner()) {
+				fin += 1;
+				this.showAlert();
+			}
 		}
 	},
 
@@ -74,10 +89,10 @@ var App = React.createClass({
 		return (
 			<div>
 				<Cabecera texto={texto}/>
+				<div style={divStyle}>Número de movimientos: {this.state.movimientos}</div>
 				<Tablero valores={this.state.valores}
 					manejadorTableroClick={this.appClick}/>
-				<button onClick={this.reset}>Reiniciar partida</button>
-				Número de movimientos: {this.state.movimientos}
+				<div style={divStyle}><Button style={resetStyle} onClick={this.reset}>Reiniciar partida</Button></div>
 			</div>
 		)
 	}

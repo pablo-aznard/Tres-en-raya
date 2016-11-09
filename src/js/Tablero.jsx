@@ -1,4 +1,12 @@
+var React = require('react');
+var ReactDOM = require('react-dom');
+
 var Casilla = require("./Casilla.jsx");
+
+var tableroStyle = {
+	margin: "5em auto",
+	textAlign: "center"
+};
 
 var Tablero = React.createClass({
 	tableroClick: function (numeroFila, numeroColumna){
@@ -17,7 +25,7 @@ var Tablero = React.createClass({
 			)
 		}, this);
 		return (
-			<div>{tablero}</div>
+			<div style={tableroStyle}>{tablero}</div>
 		);
 	}
 });

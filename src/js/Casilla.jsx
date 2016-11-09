@@ -1,6 +1,11 @@
+import {Button} from 'react-bootstrap';
+
+var React = require('react');
+var ReactDOM = require('react-dom');
+
 const casillaStyle = {
-	height: '100px',
-	width: '100px'
+	height: '5em',
+	width: '5em'
 };
 
 let Casilla = React.createClass({
@@ -11,12 +16,22 @@ let Casilla = React.createClass({
 	},
 	render: function(){
 		return (
-			<button
+			<Button
+				bsSize="large"
 				style={casillaStyle}
 				className={this.props.valor === "-" ? "clickable" : "no_clickable"}
-				onClick={this.casillaClick}>
+				onClick={this.casillaClick} >
+
 					{this.props.valor}
-			 </button>
+			</Button>
+
+
+			// <button
+			// 	style={casillaStyle}
+			// 	className={this.props.valor === "-" ? "clickable" : "no_clickable"}
+			// 	onClick={this.casillaClick}>
+			// 		{this.props.valor}
+			//  </button>
 		)
 	}
 });

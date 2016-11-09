@@ -3,15 +3,26 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Tres en Raya - IWEB</title>
-	<script src="https://unpkg.com/react@15.3.2/dist/react.min.js"></script>
-	<script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.min.js"></script>	
+	<!-- <script src="https://unpkg.com/react@15.3.2/dist/react.min.js"></script>
+	<script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.min.js"></script>	 -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="images/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" href="./styles/app.css">
+	<style>
+		.main-header {width: 100%; background-color: #84A48D; box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.6); display: flex; flex-direction: row; align-content: center; align-items: center;}
+		.main-header h1 {color: white; flex-grow: 1; margin-left: 10rem;}
+		.main-header img.logo {max-height: 3em; max-width: 3em; flex-grow: 1; margin-right: 10rem;}
+		#contenedor {margin: 0 auto;}
+	</style>
 </head>
 <body>
-	<h1>Tres En Raya - IWEB</h1> 
-	<div class="game" id="contenedor"></div> 
-	<img class="logo" src="images/logo.png" />
+	<div class="main-header">
+		<h1>Tres En Raya - IWEB</h1>
+		<img class="logo" src="images/logo.png" />
+	</div>
+	<div class="game" id="contenedor"></div>
 	<script type="text/javascript" src="src/build/index.js">
 	</script>
 </body>
